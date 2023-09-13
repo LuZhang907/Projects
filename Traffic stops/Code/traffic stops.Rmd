@@ -1,0 +1,40 @@
+---
+title: "Standford Open Policing Project"
+author: "Lu Zhang"
+date: '2023-09-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Context and Inspiration
+Refere by https://www.kaggle.com/datasets/faressayah/stanford-open-policing-project.
+
+On a typical day in the United States, police officers make more than 50000 traffic stops. The team from Standford is gathering, analyzing, and releasing records from millions of traffic stops by law enforcement agencies across the country. The goal of this project is to help researchers, journalists, and policymakers inverstgate and improve interactions between police and the public.
+
+There are some questions that the tem care about:
+* Do men or women speed more often?
+* Does gender affect who gets searched during a stop?
+* During a search, how often is the driver frisked?
+* Which year had the least number of stops?
+* How does drug activity change by time of day?
+* Do most stops occur at night?
+
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
