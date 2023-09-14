@@ -14,7 +14,9 @@ Refere by https://www.kaggle.com/datasets/faressayah/stanford-open-policing-proj
 
 On a typical day in the United States, police officers make more than 50000 traffic stops. The team from Standford is gathering, analyzing, and releasing records from millions of traffic stops by law enforcement agencies across the country. The goal of this project is to help researchers, journalists, and policymakers inverstgate and improve interactions between police and the public.
 
-There are some questions that the tem care about:
+This dataset includes 9 Mb of stop data from Rhode Island, covering all of 2013 onwards.
+
+There are some questions that the term care about:
 * Do men or women speed more often?
 * Does gender affect who gets searched during a stop?
 * During a search, how often is the driver frisked?
@@ -25,8 +27,8 @@ There are some questions that the tem care about:
 
 
 
-```{r cars}
-summary(cars)
+```{r library set up}
+library(data.table)
 ```
 
 ## Including Plots
