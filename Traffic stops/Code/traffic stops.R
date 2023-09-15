@@ -146,7 +146,7 @@ bar_plot3 <- barplot(Q6$freq_stops, names.arg = Q6$hour,
                      col = "#1984c5")
 
 
-text(bar_plot3, Q6$freq_stops+5, Q6$freq_stops, cex=1)
+text(bar_plot3, Q6$freq_stops+80, Q6$freq_stops, cex=1)
 
 
 # save as new dataset for future Tableau
