@@ -70,6 +70,92 @@ chisq.test(Q2$driver_gender, Q2$search_conducted)
 # We can conduct linear regression if you interest how gender affect who get searched during a stop. 
 # For model accuracy, we can also consider other covariates like stop time, driver gender ect.
 
+# During a search, how often is the driver frisked?
+
+Q3 <- dat %>%
+  filter(grepl('Frisk', search_type))
+
+Q3 <- data.frame(Q3)
+
+table(Q3$search_type)
+
+frisk_count = length(Q3$search_type)
+total_count = length(dat$search_type)
+frisk_ratio = frisk_count/total_count 
+
+frisk_ratio
+
+# During a search, driver has around 0.3% probabilities been frisked. In other words, if we have 1000 search during 
+# a stop, around 3 drivers will be frisked.
+
+# Which year had the least number of stops?
+dat$year <- format(dat$stop_date, "%Y")
+
+Q4 <- dat %>%
+  group_by(year) %>%
+  summarise(freq = n())
+
+Q4 <- data.frame(Q4)
+Q4_ordered <- Q4[order(Q4$freq),]
+Q4_ordered
+
+bar_plot <- barplot(Q4$freq,names.arg = Q4$year, xlab = "year", ylab = "number of stops",
+                    ylim = c(0,15000),
+                    col = "#1984c5")
+text(bar_plot, Q4$freq+200, Q4$freq,cex = 1) 
+
+# 2005 had the least number of stops
+
+# How does drug activity change by time of day?
+colnames(dat)
+typeof(dat$stop_time)
+Hour <- format(strptime(dat$stop_time, format = "%H:%M"), "%H")
+head(Hour)
+
+dat$hour <- Hour
+
+Q5 <- dat %>%
+  select(hour, drugs_related_stop) %>%
+  filter(drugs_related_stop == "TRUE") %>%
+  group_by(hour) %>%
+  summarise(freq = n())
+
+Q5 <- data.frame(Q5)
+Q5
+
+bar_plot2 <- barplot(Q5$freq,names.arg = Q5$hour, xlab = "time", ylab = "number of drug related stops",
+                    ylim = c(0,150),
+                    col = "#1984c5")
+text(bar_plot2, Q5$freq+5, Q5$freq,cex = 1) 
+
+# 0i represents 1 hour interval 0i:00 - 0(i):59, i = 0, 1,..., 23
+
+# Do most stops occur at night?
+
+Q6 <- dat %>%
+  select(hour) %>%
+  group_by(hour) %>%
+  summarise(freq_stops = n())
+
+Q6 <- data.frame(Q6)
+Q6
+
+bar_plot3 <- barplot(Q6$freq_stops, names.arg = Q6$hour,
+                     xlab = "time", ylab = "number of stops",
+                     ylim = c(0,8000),
+                     col = "#1984c5")
+
+
+text(bar_plot3, Q6$freq_stops+5, Q6$freq_stops, cex=1)
+
+# nope, according to the frequency bar chart, most stops occur at 10:00-11:00 AM. 
+# there are three time intervals more likely to have stops: 23:00 PM -01:00 AM, 9:00 AM - 12:00 PM,
+# and aroud 14:00 PM - 15:00 PM.
+
+
+
+
+
 
 
 
