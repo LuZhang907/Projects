@@ -148,6 +148,9 @@ bar_plot3 <- barplot(Q6$freq_stops, names.arg = Q6$hour,
 
 text(bar_plot3, Q6$freq_stops+5, Q6$freq_stops, cex=1)
 
+
+# save as new dataset for future Tableau
+fwrite(dat, "./Traffic stops/Data/police_project_edited.csv")
 # nope, according to the frequency bar chart, most stops occur at 10:00-11:00 AM. 
 # there are three time intervals more likely to have stops: 23:00 PM -01:00 AM, 9:00 AM - 12:00 PM,
 # and aroud 14:00 PM - 15:00 PM.
