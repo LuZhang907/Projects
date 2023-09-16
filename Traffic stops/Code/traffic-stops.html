@@ -381,11 +381,15 @@ assist researchers, journalists, and politicians in investigating and
 improving relations between police and the public.</p>
 <p>This collection contains 9 Mb of Rhode Island stop data from 2013
 forward.</p>
-<p>The tearm is concerned with the following issues: * Do men or women
-speed more often? * Does gender affect who gets searched during a stop?
-* During a search, how often is the driver frisked? * Which year had the
-least number of stops? * How does drug activity change by time of day? *
-Do most stops occur at night?</p>
+<p>The tearm is concerned with the following issues:</p>
+<ul>
+<li>Do men or women speed more often?</li>
+<li>Does gender affect who gets searched during a stop?</li>
+<li>During a search, how often is the driver frisked?</li>
+<li>Which year had the least number of stops?</li>
+<li>How does drug activity change by time of day?</li>
+<li>Do most stops occur at night?</li>
+</ul>
 </div>
 <div id="library-set-up-and-data-input" class="section level2">
 <h2>Library set up and data input</h2>
@@ -440,8 +444,8 @@ dim(dat)</code></pre>
 ## [13] &quot;is_arrested&quot;        &quot;stop_duration&quot;      &quot;drugs_related_stop&quot;</code></pre>
 <p>Let’s go through the questions one by one now!</p>
 </div>
-<div id="questions" class="section level2">
-<h2>Questions</h2>
+<div id="qas" class="section level2">
+<h2>Q&amp;As</h2>
 <div id="q1-do-men-or-women-speed-more-often" class="section level3">
 <h3>Q1 Do men or women speed more often?</h3>
 <pre class="r"><code>Q1 &lt;- dat %&gt;% 

@@ -18,12 +18,13 @@ On an average day in the United States, police officers conduct over 50000 traff
 This collection contains 9 Mb of Rhode Island stop data from 2013 forward.
 
 The tearm is concerned with the following issues:
-* Do men or women speed more often?
-* Does gender affect who gets searched during a stop?
-* During a search, how often is the driver frisked?
-* Which year had the least number of stops?
-* How does drug activity change by time of day?
-* Do most stops occur at night?
+
+*  Do men or women speed more often?
+*  Does gender affect who gets searched during a stop?
+*  During a search, how often is the driver frisked?
+*  Which year had the least number of stops?
+*  How does drug activity change by time of day?
+*  Do most stops occur at night?
 
 ## Library set up and data input
 ```{r}
@@ -43,7 +44,7 @@ colnames(dat)
 
 Let's go through the questions one by one now!
 
-## Questions
+## Q&As
 ### Q1 Do men or women speed more often?
 
 ```{r}
