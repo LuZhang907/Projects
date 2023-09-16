@@ -7,16 +7,17 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=12, fig.height=6) 
 ```
 
 ## Context and Inspiration
-Refere by https://www.kaggle.com/datasets/faressayah/stanford-open-policing-project.
+The data and context presented here were gathered by https://www.kaggle.com/datasets/faressayah/stanford-open-policing-project.
 
-On a typical day in the United States, police officers make more than 50000 traffic stops. The team from Standford is gathering, analyzing, and releasing records from millions of traffic stops by law enforcement agencies across the country. The goal of this project is to help researchers, journalists, and policymakers inverstgate and improve interactions between police and the public.
+On an average day in the United States, police officers conduct over 50000 traffic stops. The Standford team is collecting, analyzing, and disseminating data from millions of traffic stops conducted by law enforcement agencies across the country. The project's purpose is to assist researchers, journalists, and politicians in investigating and improving relations between police and the public.
 
-This dataset includes 9 Mb of stop data from Rhode Island, covering all of 2013 onwards.
+This collection contains 9 Mb of Rhode Island stop data from 2013 forward.
 
-There are some questions that the term care about:
+The tearm is concerned with the following issues:
 * Do men or women speed more often?
 * Does gender affect who gets searched during a stop?
 * During a search, how often is the driver frisked?
@@ -24,19 +25,173 @@ There are some questions that the term care about:
 * How does drug activity change by time of day?
 * Do most stops occur at night?
 
-
-
-
-```{r library set up}
+## Library set up and data input
+```{r}
 library(data.table)
+library(tidyverse)
+library(ggplot2)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+getwd()
+dat <- fread("../Data/police_project.csv")
+dat <- data.frame(dat)
+dim(dat)
+head(dat)
+colnames(dat)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Let's go through the questions one by one now!
+
+## Questions
+### Q1 Do men or women speed more often?
+
+```{r}
+Q1 <- dat %>% 
+  select(driver_gender, violation) %>%
+  filter(violation == "Speeding") %>%
+  group_by(driver_gender) %>%
+  summarize(freq = n())
+
+Q1 <- data.frame(Q1)
+Q1
+```
+```{r}
+ggplot(data = Q1, aes(x = driver_gender, y = freq))+
+  geom_bar(stat="identity", fill = "#1984c5")+
+  geom_text(aes(label = freq), vjust = 1.6)+
+  theme_minimal()
+```
+
+From 2005 to 2013, there were 32979 speeding records for men in Rhode Island, whereas there were 15482 for women. As a result, guys speed more frequently in this sample data. 
+
+### Q2 Does gender affect who gets searched during a stop?
+
+```{r}
+Q2 <- dat %>%
+  select(driver_gender, search_conducted) %>%
+  filter(driver_gender %in% c("F","M"))
+
+Q2 <- data.frame(Q2)
+```
+
+```{r}
+### cross table
+crt <- table(Q2$driver_gender, Q2$search_conducted)
+#crt
+
+### percentage table
+propt <- data.frame(round(prop.table(crt,1),4))
+colnames(propt) <- c("driver_gender","search_conducted","percentage")
+#propt
+
+### visualization
+crt <- data.frame(crt)
+colnames(crt) <- c("driver_gender","search_conducted","frequency")
+
+ggplot(crt, aes(x = driver_gender, y = search_conducted))+
+  geom_tile(aes(fill = frequency)) +
+  geom_text(aes(label = frequency), color = "black", fontface = "bold", size = 5)
+
+propt$labelpos <- ifelse(propt$search_conducted == "TRUE", propt$percentage/2, 1- propt$percentage/2)
+
+ggplot(dat = propt, aes(x = driver_gender, y = percentage, fill = search_conducted))+
+  geom_bar(position = "fill", stat = "identity", color = "black", width = 0.9)+
+  scale_y_continuous(label = scales::percent)+
+  scale_fill_manual(values = c("#1984c5","#c23728"))+
+  geom_text(aes(label = paste0(percentage*100, "%"), y = labelpos),size =2)
+```
+
+
+In the sample of traffic stops, there are 23511 females and 62895 males. During the stop, 471 out of 23511 (about 2%) ladies were searched, while 2725 out of 62895 (approximately 4.33%) males were searched. The chi-square test is used to determine whether there are any significant connections between gender and search behaviors.
+
+```{r}
+chisq.test(Q2$driver_gender, Q2$search_conducted)
+```
+
+The fact that the p value (2.23-16) is smaller than the significance level (0.05) implies that there is a significant relationship between driver gender and search activity. In other words, gender influences who is searched during a stop (If you are interested in how gender influences who is searched during a stop, we can run linear regression. Other factors, such as stop time, driver gender, and so on, might be considered for model accuracy).
+
+### Q3 During a search, how often is the driver frisked?
+```{r}
+Q3 <- dat %>%
+  filter(grepl('Frisk', search_type))
+
+Q3 <- data.frame(Q3)
+
+#table(Q3$search_type)
+
+frisk_count = length(Q3$search_type)
+total_count = length(dat$search_type)
+frisk_ratio = frisk_count/total_count 
+
+frisk_ratio
+```
+During a search, the driver has a 0.3% chance of being frisked. In other words, if we conduct 1000 searches during a stop, about three drivers will be frisked.
+
+### Q4 Which year had the least number of stops?
+```{r}
+dat$year <- format(dat$stop_date, "%Y")
+
+Q4 <- dat %>%
+  group_by(year) %>%
+  summarise(freq = n())
+
+Q4 <- data.frame(Q4)
+Q4_ordered <- Q4[order(Q4$freq),]
+Q4_ordered
+```
+```{r}
+bar_plot <- barplot(Q4$freq,names.arg = Q4$year, xlab = "year", ylab = "number of stops",
+                    ylim = c(0,15000),
+                    col = "#1984c5")
+text(bar_plot, Q4$freq+300, Q4$freq,cex = 1) 
+```
+2005 appears to have had the fewest stops.
+
+### Q5 How does drug activity change by time of day?
+```{r}
+#colnames(dat)
+#typeof(dat$stop_time)
+Hour <- format(strptime(dat$stop_time, format = "%H:%M"), "%H")
+#head(Hour)
+
+dat$hour <- Hour
+
+Q5 <- dat %>%
+  select(hour, drugs_related_stop) %>%
+  filter(drugs_related_stop == "TRUE") %>%
+  group_by(hour) %>%
+  summarise(freq = n())
+
+Q5 <- data.frame(Q5)
+#Q5
+```
+
+```{r}
+bar_plot2 <- barplot(Q5$freq,names.arg = Q5$hour, xlab = "time", ylab = "number of drug related stops",
+                    ylim = c(0,150),
+                    col = "#1984c5")
+text(bar_plot2, Q5$freq+5, Q5$freq,cex = 1) 
+```
+
+0i indicates a one-hour interval from 0i:00 to 0i:59, with i = 0, 1,..., 23. For example, 01 signifies 01:00-01:59 AM. According to the bar plot, from 23:00 PM to 00:59 PM, drug activity is at its peak.
+
+
+### Q6 Do most stops occur at night?
+```{r}
+Q6 <- dat %>%
+  select(hour) %>%
+  group_by(hour) %>%
+  summarise(freq_stops = n())
+
+Q6 <- data.frame(Q6)
+#Q6
+
+bar_plot3 <- barplot(Q6$freq_stops, names.arg = Q6$hour,
+                     xlab = "time", ylab = "number of stops",
+                     ylim = c(0,8000),
+                     col = "#1984c5")
+text(bar_plot3, Q6$freq_stops+120, Q6$freq_stops, cex=1)
+```
+
+No, according to the frequency bar chart, the majority of stops occur between 9:00 AM and 12:00 AM. Stops are most common at the following times: 23:00 PM -01:00 AM, 9:00 AM - 12:00 PM, and around 14:00 PM - 15:00 PM.

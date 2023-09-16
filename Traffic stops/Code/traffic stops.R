@@ -25,9 +25,6 @@ ggplot(data = Q1, aes(x = driver_gender, y = freq))+
   geom_text(aes(label = freq), vjust = 1.6)+
   theme_minimal()
 
-# In the Rhode Island, from 2005 to 2013, we have 32979 speeding records for the man, while we have 15482 for the women.
-# therefore, in this sample data, men speed more often.
-
 #Does gender affect who gets searched during a stop?
 ## EDA
 Q2 <- dat %>%
@@ -60,15 +57,7 @@ ggplot(dat = propt, aes(x = driver_gender, y = percentage, fill = search_conduct
   scale_y_continuous(label = scales::percent)+
   geom_text(aes(label = paste0(percentage*100, "%"), y = labelpos),size =2)
 
-# We have 23511 females, 62895 males in the sample of traffic stops. 471 out of 23511 (around 2 %) females were searched 
-# during stop.; 2725 out of 62895 (around 4.33 %) males were searched during the stop
-# To see is there signifcant assocations between gender and search conductions, we need to use chi-square test
 chisq.test(Q2$driver_gender, Q2$search_conducted)
-
-# p value (2.23-16) less than significance level (0.05) indicates that there is a significant assocaition
-# between driver's gender and search conduction. In other words, gender affects who get searched during a stop.
-# We can conduct linear regression if you interest how gender affect who get searched during a stop. 
-# For model accuracy, we can also consider other covariates like stop time, driver gender ect.
 
 # During a search, how often is the driver frisked?
 
@@ -84,9 +73,6 @@ total_count = length(dat$search_type)
 frisk_ratio = frisk_count/total_count 
 
 frisk_ratio
-
-# During a search, driver has around 0.3% probabilities been frisked. In other words, if we have 1000 search during 
-# a stop, around 3 drivers will be frisked.
 
 # Which year had the least number of stops?
 dat$year <- format(dat$stop_date, "%Y")
@@ -104,13 +90,11 @@ bar_plot <- barplot(Q4$freq,names.arg = Q4$year, xlab = "year", ylab = "number o
                     col = "#1984c5")
 text(bar_plot, Q4$freq+200, Q4$freq,cex = 1) 
 
-# 2005 had the least number of stops
-
 # How does drug activity change by time of day?
-colnames(dat)
-typeof(dat$stop_time)
+#colnames(dat)
+#typeof(dat$stop_time)
 Hour <- format(strptime(dat$stop_time, format = "%H:%M"), "%H")
-head(Hour)
+#head(Hour)
 
 dat$hour <- Hour
 
@@ -127,8 +111,6 @@ bar_plot2 <- barplot(Q5$freq,names.arg = Q5$hour, xlab = "time", ylab = "number 
                     ylim = c(0,150),
                     col = "#1984c5")
 text(bar_plot2, Q5$freq+5, Q5$freq,cex = 1) 
-
-# 0i represents 1 hour interval 0i:00 - 0(i):59, i = 0, 1,..., 23
 
 # Do most stops occur at night?
 
@@ -148,12 +130,9 @@ bar_plot3 <- barplot(Q6$freq_stops, names.arg = Q6$hour,
 
 text(bar_plot3, Q6$freq_stops+80, Q6$freq_stops, cex=1)
 
-
 # save as new dataset for future Tableau
 fwrite(dat, "./Traffic stops/Data/police_project_edited.csv")
-# nope, according to the frequency bar chart, most stops occur at 10:00-11:00 AM. 
-# there are three time intervals more likely to have stops: 23:00 PM -01:00 AM, 9:00 AM - 12:00 PM,
-# and aroud 14:00 PM - 15:00 PM.
+
 
 
 
