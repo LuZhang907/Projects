@@ -55,7 +55,7 @@ propt$labelpos <- ifelse(propt$search_conducted == "TRUE", propt$percentage/2, 1
 ggplot(dat = propt, aes(x = driver_gender, y = percentage, fill = search_conducted))+
   geom_bar(position = "fill", stat = "identity", color = "black", width = 0.9)+
   scale_y_continuous(label = scales::percent)+
-  geom_text(aes(label = paste0(percentage*100, "%"), y = labelpos),size =2)
+  geom_text(aes(label = paste0(percentage*100, "%"), y = labelpos),size =5)
 
 chisq.test(Q2$driver_gender, Q2$search_conducted)
 
