@@ -1,6 +1,6 @@
  👋 Greetings, my name is Lu 😁. I am currently a PhD candidate in applied statistics ⚡️.
  
-📊 This repository was created to demonstrate some technical skills commonly used by Data Scientists. I created three projects to demonstrate my experience as a project manager at a consulting firm and as a data scientist intern at Rocket Mortgage.
+📊 This repository was created to demonstrate some technical skills commonly used by Data Scientists. I created three projects to demonstrate my experience as a project manager at a consulting lab and as a data scientist intern at Rocket Mortgage.
 
 ##  🚔 [Standford Open Project: Analysis for Traffic Stops](https://medium.com/@lzhang0907/standford-open-policing-project-analysis-of-traffic-stops-2987b811079f).
 
