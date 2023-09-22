@@ -12,3 +12,6 @@ The majority of my consulting clients (Fall 2023 semaster) have either an ordere
 
 ## All lending club loan data analysis: paid off or charge off?
 
+This is a large data project with millions of data records. I will begin with data cleansing, feature selection, and then modeling. Fundamental machine learning methods will be used to investigate whether the loan will be fully paid or charged off, thereby reducing the company's chance of losing money due to default.
+
+Chapter 1 - Background introduction and data cleansing, raw data visualization, and feature section
