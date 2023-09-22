@@ -6,7 +6,7 @@
 
 Exploratory analyses such as (percentage)cross tables and visualizations were used to answer all term-related queries. Three **R** package were used: **data.table**(parelle reading data, personal prefreference even this data set is modest in here), using **tidyverse** to do data selection, filter, and calulation statistical properties by group, and **ggplot2** to visualize all the results.
 
-## 💫 [Proportional Odds Model in R (How to get the 5 star rating?)](https://medium.com/@lzhang0907/proportional-odds-model-in-r-53698533cab0).
+## 💫 [NYC Restaurant Data Analysis: How to get the 5-star?](https://medium.com/@lzhang0907/proportional-odds-model-in-r-53698533cab0).
 
 The majority of my consulting clients (Fall 2023 semaster) have either an ordered response variable or a named likert scale response. As a result, I consider the NYC restaurant data, which has ordered responses to replicate similar work I've done for my clients, as documentation to formulate the procedure for managing this data type. Still utilizing **R**, various packages were utilized, with the exception of those for data cleansing and visualization. The unique packages were **ordinal**, which was used to perform the proportional odds modeling (POM), and **effects**, which visualized the parallel assumption for POM.
 
