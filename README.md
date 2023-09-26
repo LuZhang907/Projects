@@ -1,17 +1,30 @@
- 👋 Greetings, my name is Lu 😁. I am currently a PhD candidate in applied statistics ⚡️.
+ 👋 Greetings, my name is Lu 😁. I am currently a PhD student in applied statistics ⚡️.
  
-📊 This repository was created to demonstrate some technical skills commonly used by Data Scientists. I created three projects to demonstrate my experience as a project manager at a consulting lab and as a data scientist intern at Rocket Mortgage.
+📊 This repository was created to demonstrate some typical technical skills used by Data Scientists. 
 
 ##  🚔 [Standford Open Project: Analysis for Traffic Stops](https://medium.com/@lzhang0907/standford-open-policing-project-analysis-of-traffic-stops-2987b811079f).
+This project employs R and statistical methods to address the following issues:
 
-Exploratory analyses such as (percentage)cross tables and visualizations were used to answer all term-related queries. Three **R** package were used: **data.table**(parelle reading data, personal prefreference even this data set is modest in here), using **tidyverse** to do data selection, filter, and calulation statistical properties by group, and **ggplot2** to visualize all the results.
+* The tearm is concerned with the following issues:
+* Do men or women speed more often?
+* Does gender affect who gets searched during a stop?
+* During a search, how often is the driver frisked?
+* Which year had the least number of stops?
+* How does drug activity change by time of day?
+* Do most stops occur at night?
+
 
 ## 💫 [NYC Restaurant Data Analysis: How to get the 5-star?](https://medium.com/@lzhang0907/proportional-odds-model-in-r-53698533cab0).
 
-The majority of my consulting clients (Fall 2023 semaster) have either an ordered response variable or a named likert scale response. As a result, I consider the NYC restaurant data, which has ordered responses to replicate similar work I've done for my clients, as documentation to formulate the procedure for managing this data type. Still utilizing **R**, various packages were utilized, with the exception of those for data cleansing and visualization. The unique packages were **ordinal**, which was used to perform the proportional odds modeling (POM), and **effects**, which visualized the parallel assumption for POM.
+The goal of this project is to handle problems involving response variables with likert order scales (also known as ordered response variables). 
 
-## All lending club loan data analysis: paid off or charge off?
+## 💰 All lending club loan data analysis: paid off or charge off?
 
-This is a large data project with millions of data records. I will begin with data cleansing, feature selection, and then modeling. Fundamental machine learning methods will be used to investigate whether the loan will be fully paid or charged off, thereby reducing the company's chance of losing money due to default.
+This project is about risk management by successfully predicting if a customer's loan will be fully paid or charged off depending on selected features. This is a massive data project including millions of data records. On such data, data cleansing, feature selection, and Machine Learning Modling were used to investigate.
 
-Chapter 1 - Background introduction and data cleansing, raw data visualization, and feature section
+* Chapter 1 - Background introduction and data cleansing, raw data visualization, and select features.
+* Chapter 2 - Data Preprocessing and Modeling (Logistic Regression)
+* Chapter 3 - Random Undersampling Algorithm to Handle Imbalance Dataset
+* Chapter 4 - Random Forest
+
+... keep undating...
