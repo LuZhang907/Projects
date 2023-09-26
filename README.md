@@ -1,6 +1,4 @@
- 👋 Greetings, my name is Lu 😁. I am currently a PhD student in applied statistics ⚡️.
- 
-📊 This repository was created to demonstrate some typical technical skills used by Data Scientists. 
+ 👋 Greetings, my name is Lu 😁. I am currently a PhD student in applied statistics ⚡️. 📊 This repository was created to demonstrate some typical technical skills used by Data Scientists. 
 
 ##  🚔 [Standford Open Project: Analysis for Traffic Stops](https://medium.com/@lzhang0907/standford-open-policing-project-analysis-of-traffic-stops-2987b811079f).
 This project employs R and statistical methods to address the following issues:
