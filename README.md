@@ -25,4 +25,4 @@ This project is about risk management by successfully predicting if a customer's
 * Chapter 3 - Random Undersampling Algorithm to Handle Imbalance Dataset
 * Chapter 4 - Random Forest
 
-... keep undating...
+
